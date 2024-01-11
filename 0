@@ -1,0 +1,22 @@
+
+def loggerInit(logFileName):
+    try:
+        os.makedirs("logs")
+    except:
+        pass
+    logger = logging.getLogger(__name__)
+    logger.setLevel(logging.DEBUG)
+    formatter = logging.Formatter('%(asctime)s:%(name)s:%(message)s')
+    file_handler = logging.FileHandler(f'logs/{logFileName}')
+    # file_handler.setLevel(logging.ERROR)
+    file_handler.setFormatter(formatter)
+    logger.addHandler(file_handler)
+
+    stream_handler = logging.StreamHandler()
+    stream_handler.setFormatter(formatter)
+    # stream_handler.setLevel(logging.ERROR)
+    logger.addHandler(stream_handler)
+    return logger
+
+
+logger = loggerInit(logFileName="fetchCompaniesListings.py".replace(".py", ".log"))
